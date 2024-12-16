@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.md": "markdown",
         "iostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -56,6 +57,15 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "format": "cpp",
+        "numbers": "cpp",
+        "span": "cpp",
+        "text_encoding": "cpp",
+        "variant": "cpp"
     }
 }
