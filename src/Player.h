@@ -3,12 +3,12 @@
 
 #include <string>
 
-// Structure Player
+// Struct Player
 struct Player {
     std::string name;
-    char symbol;
+    std::string symbol;
 };
 
-Player create_player(char taken_symbol = '\0');
+Player create_player(std::string taken_symbol = "\0");
 
 #endif

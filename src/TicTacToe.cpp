@@ -2,17 +2,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
-void initialize_board(char board[BOARD_SIZE][BOARD_SIZE]) {
+void initialize_board(std::string board[BOARD_SIZE][BOARD_SIZE]) {
     int count = 1;
     for (int i = 0; i < BOARD_SIZE; i++) {
         for (int j = 0; j < BOARD_SIZE; j++) {
-            board[i][j] = '0' + count++;
+            board[i][j] = std::to_string(count++) ;
         }
+        
     }
 }
 
-void draw_game_board(char board[BOARD_SIZE][BOARD_SIZE]) {
+void draw_game_board(std::string board[BOARD_SIZE][BOARD_SIZE]) {
     std::cout << "\n";
     for (int i = 0; i < BOARD_SIZE; i++) {
         for (int j = 0; j < BOARD_SIZE; j++) {
@@ -23,20 +25,73 @@ void draw_game_board(char board[BOARD_SIZE][BOARD_SIZE]) {
     std::cout << "\n";
 }
 
-bool check_winner(char board[BOARD_SIZE][BOARD_SIZE], char symbol) {
+bool check_winner(std::string board[BOARD_SIZE][BOARD_SIZE], std::string symbol) {
+    // Nb symboles nécessaires pour gagner 
+    //(3 si BOARD_SIZE = 3 et 4 si BOARD_SIZE = 4 ou 5)
+    int win_condition = (BOARD_SIZE == 3) ? 3 : 4;
+
+    // Vérification des lignes
     for (int i = 0; i < BOARD_SIZE; i++) {
-        if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol) return true;
-        if (board[0][i] == symbol && board[1][i] == symbol && board[2][i] == symbol) return true;
+        int count = 0;
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            if (board[i][j] == symbol) {
+                count++;
+                if (count == win_condition) return true;
+            } else {
+                count = 0;
+            }
+        }
     }
-    if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) return true;
-    if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol) return true;
+
+    // Vérification des colonnes
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        int count = 0;
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            if (board[j][i] == symbol) {
+                count++;
+                if (count == win_condition) return true;
+            } else {
+                count = 0;
+            }
+        }
+    }
+
+    // Vérification des diagonales
+    for (int i = 0; i <= BOARD_SIZE - win_condition; i++) {
+        for (int j = 0; j <= BOARD_SIZE - win_condition; j++) {
+            int count_main_diag = 0;
+            int count_anti_diag = 0;
+
+            for (int k = 0; k < win_condition; k++) {
+                // Diagonale principale
+                if (board[i + k][j + k] == symbol) {
+                    count_main_diag++;
+                    if (count_main_diag == win_condition) return true;
+                } else {
+                    count_main_diag = 0;
+                }
+
+                // Diagonale secondaire
+                if (board[i + k][j + win_condition - k - 1] == symbol) {
+                    count_anti_diag++;
+                    if (count_anti_diag == win_condition) return true;
+                } else {
+                    count_anti_diag = 0;
+                }
+            }
+        }
+    }
+
+    // Match nul
     return false;
 }
 
-bool is_board_full(char board[BOARD_SIZE][BOARD_SIZE]) {
+
+
+bool is_board_full(std::string board[BOARD_SIZE][BOARD_SIZE]) {
     for (int i = 0; i < BOARD_SIZE; i++) {
         for (int j = 0; j < BOARD_SIZE; j++) {
-            if (board[i][j] != 'X' && board[i][j] != 'O') {
+            if (board[i][j] != "X" && board[i][j] != "O") {
                 return false;
             }
         }
@@ -44,7 +99,7 @@ bool is_board_full(char board[BOARD_SIZE][BOARD_SIZE]) {
     return true;
 }
 
-void play_turn(Player player, char board[BOARD_SIZE][BOARD_SIZE]) {
+void play_turn(Player player, std::string board[BOARD_SIZE][BOARD_SIZE]) {
     int position;
     bool valid_move = false;
 
@@ -54,7 +109,7 @@ void play_turn(Player player, char board[BOARD_SIZE][BOARD_SIZE]) {
         int row = (position - 1) / BOARD_SIZE;
         int col = (position - 1) % BOARD_SIZE;
 
-        if (board[row][col] != 'X' && board[row][col] != 'O') {
+        if (board[row][col] != "X" && board[row][col] != "O") {
             board[row][col] = player.symbol;
             valid_move = true;
         } else {
@@ -63,7 +118,7 @@ void play_turn(Player player, char board[BOARD_SIZE][BOARD_SIZE]) {
     }
 }
 
-void play_ia_turn(Player ai, char board[BOARD_SIZE][BOARD_SIZE]) {
+void play_ia_turn(Player ai, std::string board[BOARD_SIZE][BOARD_SIZE]) {
     int position;
     bool valid_move = false;
 
@@ -74,7 +129,7 @@ void play_ia_turn(Player ai, char board[BOARD_SIZE][BOARD_SIZE]) {
         int row = (position - 1) / BOARD_SIZE;
         int col = (position - 1) % BOARD_SIZE;
 
-        if (board[row][col] != 'X' && board[row][col] != 'O') {
+        if (board[row][col] != "X" && board[row][col] != "O") {
             board[row][col] = ai.symbol;
             valid_move = true;
         }

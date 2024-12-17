@@ -2,9 +2,9 @@
 #include <iostream>
 
 // Définition de la fonction create_player (sans valeur par défaut ici)
-Player create_player(char taken_symbol) {
+Player create_player(std::string taken_symbol) {
     Player player;
-    std::cout << "Entrez le nom du joueur : ";
+    std::cout << "Entrez le nom du joueur (Sans espace svp ;D) : ";
     std::cin >> player.name;
 
     bool valid_symbol = false;
@@ -16,7 +16,7 @@ Player create_player(char taken_symbol) {
         std::cin >> player.symbol;
 
         // Si le symbole est valide et non pris
-        if ((player.symbol == 'X' || player.symbol == 'O') && player.symbol != taken_symbol) {
+        if ((player.symbol == "X" || player.symbol == "O") && player.symbol != taken_symbol) {
             valid_symbol = true;
         } else if (player.symbol == taken_symbol) {
             std::cout << "Ce symbole est deja pris. Choisissez-en un autre.\n";
