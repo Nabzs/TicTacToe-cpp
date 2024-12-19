@@ -3,7 +3,7 @@
 
 #include "Player.h"
 
-const int BOARD_SIZE = 5; // taille du plateau
+const int BOARD_SIZE = 3; // taille du plateau (On peux jouer sur un plateau de 3*3; 4*4 ou 5*5 )
 
 // initialise le plateau
 void initialize_board(std::string board[BOARD_SIZE][BOARD_SIZE]);

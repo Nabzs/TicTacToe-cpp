@@ -9,8 +9,6 @@ Player create_player(std::string taken_symbol) {
 
     bool valid_symbol = false;
 
-        // Si le joueur a choisi un nom deja pris rajouter un 2 derierre
-
     while (!valid_symbol) {
         std::cout << "Choisissez un symbole (X ou O) : ";
         std::cin >> player.symbol;

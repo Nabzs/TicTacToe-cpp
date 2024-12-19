@@ -5,7 +5,7 @@
 
 int main() {
     std::string board[BOARD_SIZE][BOARD_SIZE];
-    std::cout << BOARD_SIZE << std::endl;
+    std::cout << "La taille du plateau des de: " << BOARD_SIZE << "*" << BOARD_SIZE << std::endl;
     initialize_board(board);
 
     std::cout << "Bienvenue dans le jeu du TicTacToe\n";
@@ -22,7 +22,7 @@ int main() {
 
     if (mode == 1) {
         player2 = create_player(player1.symbol);  // deuxième joueur
-    } else {
+    } else { // mode IA
         player2.name = "IA";
         player2.symbol = (player1.symbol == "X") ? "O" : "X";
     }
