@@ -19,7 +19,7 @@ Au départ, j'avais des problèmes liés à l'utilisation de **types incompatibl
 Pour le **Puissance 4**, j'ai repris la base du code du TicTacToe et je l'ai modifiée pour répondre aux règles spécifiques du jeu :
 - Un plateau de 6x7 cases.
 - Alignement de 4 jetons horizontalement, verticalement, ou en diagonale.
-J'ai rencontré peu de difficultés sur cette partie, car la structure du code du TicTacToe était suffisamment flexible pour s'adapter.
+- J'ai rencontré peu de difficultés sur cette partie, car la structure du code du TicTacToe était suffisamment flexible pour s'adapter.
 
 ---
 
