@@ -2,21 +2,27 @@
 #define TICTACTOE_H
 
 #include "Player.h"
+#include <vector>
+#include <string>
 
-const int BOARD_SIZE = 3; // taille du plateau (On peux jouer sur un plateau de 3*3; 4*4 ou 5*5 )
+const int BOARD_SIZE = 3; // taille du plateau (On peux jouer sur un plateau de 3*3; 4*4 ou 5*5)
 
-// initialise le plateau
-void initialize_board(std::string board[BOARD_SIZE][BOARD_SIZE]);
+// Création du plateau
+void initialize_board(std::vector<std::vector<std::string>> &board);
 
-void draw_game_board(std::string board[BOARD_SIZE][BOARD_SIZE]);
+// Affiche le plateau
+void draw_game_board(const std::vector<std::vector<std::string>> &board);
 
-bool check_winner(std::string board[BOARD_SIZE][BOARD_SIZE], std::string symbol);
+// Vérif si un joueur a gagné
+bool check_winner(const std::vector<std::vector<std::string>> &board, const std::string &symbol, int board_size);
 
 // si le plateau est plein
-bool is_board_full(std::string board[BOARD_SIZE][BOARD_SIZE]);
+bool is_board_full(const std::vector<std::vector<std::string>> &board);
 
-void play_turn(Player player, std::string board[BOARD_SIZE][BOARD_SIZE]);
+// Permet de jouer son tour
+void play_turn(Player player, std::vector<std::vector<std::string>> &board);
 
-void play_ia_turn(Player ai, std::string board[BOARD_SIZE][BOARD_SIZE]);
+// Permet  a l'IA de jouer son tour
+void play_ia_turn(Player ai, std::vector<std::vector<std::string>> &board);
 
 #endif

@@ -1,55 +1,34 @@
 #include <iostream>
 #include "Player.h"
-#include "TicTacToe.h"
-#include <string.h>
+#include "Puissance4.h"
 
 int main() {
-    std::string board[BOARD_SIZE][BOARD_SIZE];
-    std::cout << "La taille du plateau des de: " << BOARD_SIZE << "*" << BOARD_SIZE << std::endl;
+    char board[BOARD_HEIGHT][BOARD_WIDTH];
     initialize_board(board);
 
-    std::cout << "Bienvenue dans le jeu du TicTacToe\n";
-    std::cout << "Veuillez choisir un mode de jeu :\n";
-    std::cout << "1. Deux joueurs\n";
-    std::cout << "2. Un joueur contre l'IA\n";
+    std::cout << "Bienvenue dans Puissance 4\n";
+    Player player1 = initialize_player(); // premier joueur
+    Player player2 = initialize_player(player1.symbol); // deuxième joueur
 
-    int mode;
-    std::cin >> mode;
-
-
-    Player player1 = create_player();  // premier joueur
-    Player player2;
-
-    if (mode == 1) {
-        player2 = create_player(player1.symbol);  // deuxième joueur
-    } else { // mode IA
-        player2.name = "IA";
-        player2.symbol = (player1.symbol == "X") ? "O" : "X";
-    }
-
-    bool fin_partie = false;
+    bool game_over = false;
     int turn = 0;
 
-    while (!fin_partie) {
-        draw_game_board(board);
+    while (!game_over) {
+        display_board(board);
         if (turn % 2 == 0) {
             play_turn(player1, board);
         } else {
-            if (mode == 1) {
-                play_turn(player2, board);
-            } else {
-                play_ia_turn(player2, board);
-            }
+            play_turn(player2, board);
         }
 
         if (check_winner(board, (turn % 2 == 0) ? player1.symbol : player2.symbol)) {
-            draw_game_board(board);
-            std::cout << ((turn % 2 == 0) ? player1.name : player2.name) << " a gagne !\n";
-            fin_partie = true;
+            display_board(board);
+            std::cout << "Felicitations ! " << ((turn % 2 == 0) ? player1.name : player2.name) << " a gagne \n";
+            game_over = true;
         } else if (is_board_full(board)) {
-            draw_game_board(board);
+            display_board(board);
             std::cout << "Match nul !\n";
-            fin_partie = true;
+            game_over = true;
         }
 
         turn++;

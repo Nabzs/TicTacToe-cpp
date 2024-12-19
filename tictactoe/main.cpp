@@ -1,11 +1,16 @@
 #include <iostream>
 #include "Player.h"
 #include "TicTacToe.h"
-#include <string.h>
+#include <string>
 
 int main() {
-    std::string board[BOARD_SIZE][BOARD_SIZE];
-    std::cout << "La taille du plateau des de: " << BOARD_SIZE << "*" << BOARD_SIZE << std::endl;
+    int board_size;
+    do {
+        std::cout << "Choisissez la taille du plateau (3, 4, ou 5) : ";
+        std::cin >> board_size;
+    } while (board_size < 3 || board_size > 5);
+
+    std::vector<std::vector<std::string>> board(board_size, std::vector<std::string>(board_size));
     initialize_board(board);
 
     std::cout << "Bienvenue dans le jeu du TicTacToe\n";
@@ -15,7 +20,6 @@ int main() {
 
     int mode;
     std::cin >> mode;
-
 
     Player player1 = create_player();  // premier joueur
     Player player2;
@@ -42,7 +46,7 @@ int main() {
             }
         }
 
-        if (check_winner(board, (turn % 2 == 0) ? player1.symbol : player2.symbol)) {
+        if (check_winner(board, (turn % 2 == 0) ? player1.symbol : player2.symbol, board_size)) {
             draw_game_board(board);
             std::cout << ((turn % 2 == 0) ? player1.name : player2.name) << " a gagne !\n";
             fin_partie = true;

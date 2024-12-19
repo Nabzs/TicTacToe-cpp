@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-// Définition de la fonction create_player (sans valeur par défaut ici)
+// Définition de la fonction create_player (sans valeur par défaut)
 Player create_player(std::string taken_symbol) {
     Player player;
     std::cout << "Entrez le nom du joueur (Sans espace svp ;D) : ";

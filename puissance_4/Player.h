@@ -6,9 +6,9 @@
 // Struct Player
 struct Player {
     std::string name;
-    std::string symbol;
+    char symbol;
 };
 
-Player create_player(std::string taken_symbol = "\0");
+Player initialize_player(char taken_symbol = '\0');
 
 #endif
